@@ -1,6 +1,7 @@
-Film "image" "integer xresolution" [1000] "integer yresolution" [720]
+# Render Code: .\pbrt .\4002-Project\head\head.pbrt
+Film "image" "integer xresolution" [1280] "integer yresolution" [720]
   "float cropwindow" [.3 .8 .15 .7] 
-  "string filename" "4002-Project/head/renders/ear.png"
+  "string filename" "head_dark.png"
   "float scale" 4
   
 LookAt 1 0 0  0 0 0  0 1 0
@@ -29,11 +30,7 @@ Material "kdsubsurface" "texture Kd" "albedomap"
    "float uroughness" [0.05] "float vroughness" [0.05]
    "bool remaproughness" ["false"]
 
-AttributeBegin
-Translate 0.6 0.04 0.088
 Shape "plymesh" "string filename" "geometry/head.ply"
       "bool discarddegenerateUVs" ["false"]
-AttributeEnd
-
 
 WorldEnd
