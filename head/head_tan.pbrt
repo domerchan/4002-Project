@@ -1,7 +1,7 @@
 # Render Code: .\pbrt .\4002-Project\head\head.pbrt
 Film "image" "integer xresolution" [1280] "integer yresolution" [720]
   "float cropwindow" [.3 .8 .15 .7] 
-  "string filename" "head_dark.png"
+  "string filename" "./4002-Project/head/renders/head_dark.png"
   "float scale" 4
   
 LookAt 1 0 0  0 0 0  0 1 0
