@@ -1,0 +1,56 @@
+# Render Code: .\pbrt .\4002-Project\head\head.pbrt
+Film "image" "integer xresolution" [1280] "integer yresolution" [720]
+  "float cropwindow" [.3 .8 .15 .7] 
+  "string filename" "head_red2.png"
+  "float scale" 4
+  
+LookAt 0.35 -0.035 -0.09  0 -0.035 -0.09  0 1 0
+
+Camera "perspective" "float fov" [30.0]
+
+# The "path" integrator directly handles subsurface scattering
+Integrator "path" "integer maxdepth" [50]
+
+Sampler "halton" "integer pixelsamples" [128]
+
+WorldBegin
+AttributeBegin
+Scale -1 1 1
+Rotate 90 -1 0 0
+Rotate 90 0 0 1
+# spectrum import doesn't work
+# LightSource "infinite" "string mapname" ["textures/doge2_latlong.exr"]
+# LightSource "distant" "point from" [10 10 10] "spectrum L" "spds/red_led.spd"
+# LightSource "distant" "point from" [10 10 10] "spectrum L" "spds/cie.stdillum.D5000.spd"
+
+#RGBY
+# LightSource "distant" "point from" [-10 10 -1] "xyz L" [ 3.06 1.55 1.4 ]
+# LightSource "distant" "point from" [-10 10 -1] "xyz L" [ .17 .303 .17 ]
+LightSource "distant" "point from" [-10 10 -1] "xyz L" [ 1.58 0.94 7.33 ]
+# LightSource "distant" "point from" [10 10 10] "xyz L" [ .308 .294 .026 ]
+
+#office
+# LightSource "distant" "point from" [10 10 10] "xyz L" [ .5169 .5215 .413 ]
+#mercury
+# LightSource "distant" "point from" [-10 10 -1] "xyz L" [ 1.0548 1.0163 0.7103 ]
+#tungsten
+# LightSource "distant" "point from" [-10 10 -1] "xyz L" [ .603 .532 .152 ]
+ttributeEnd
+
+Texture "albedomap" "color" "imagemap"
+        # "string filename" ["textures/white_tone.png"]
+        # "string filename" ["textures/D_map.png"]
+        # "string filename" ["textures/mitra.png"]
+        "string filename" ["textures/N_map.png"]
+        # "string filename" ["textures/S_map.png"]
+
+# mfp = inverse sigma_t value of Jensen's skin1 parameters (in meters)
+Material "kdsubsurface" "texture Kd" "albedomap"
+   "float eta" [1.01] "color mfp" [1.2953e-03 9.5238e-04 6.7114e-04]
+   "float uroughness" [0.05] "float vroughness" [0.05]
+   "bool remaproughness" ["false"]
+
+Shape "plymesh" "string filename" "geometry/head.ply"
+      "bool discarddegenerateUVs" ["false"]
+
+WorldEnd
